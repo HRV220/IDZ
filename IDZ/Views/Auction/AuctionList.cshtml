@@ -1,0 +1,62 @@
+﻿@model IEnumerable<IDZ.Models.Entities.Auctions>
+
+
+
+
+@Html.Partial("FilterPartial")
+
+<!-- Правая колонка: Список аукционов -->
+<div class="col-md">
+    <div class="auctions-container">
+        @if (!Model.Any())
+        {
+            <p>Нет доступных аукционов для отображения.</p>
+        }
+        else
+        {
+            foreach (var auction in Model)
+            {
+                <div class="auction-item border p-3 mb-3">
+                    <div class="row">
+                        <!-- Левая колонка: изображение -->
+                        <div class="col-md-2 d-flex align-items-center">
+                            <img src="" class="img-fluid img-rounded" alt="Auction Image">
+                        </div>
+
+                        <!-- Центральная часть: Название и описание -->
+                        <div class="col-md-3">
+                            <div>@Html.ActionLink(auction.Title, "AuctionDetails", "Auction", new { aucID = auction.AuctionID }, null)</div>
+                            <p class="text-muted mb-0">@auction.Description</p>
+                        </div>
+
+                        <div class="col-md-1">
+                            <p><strong>Текущая ставка:</strong> @auction.StartingPrice</p>
+                        </div>
+
+                        <!-- Правая часть: Время начала и окончания -->
+                        <div class="col-md-2">
+                            <p><strong>Дата начала:</strong> @auction.StartTime</p>
+                            <p><strong>Дата завершения:</strong> @auction.EndTime</p>
+                        </div>
+
+                        <!-- Крайняя правая часть: Цена выкупа и шаг -->
+                        <div class="col-md-2">
+                            <p><strong>Цена выкупа:</strong> @auction.BuyNowPrice</p>
+                            <p><strong>Шаг ставки:</strong> @auction.MinBidStep</p>
+                        </div>
+
+                        <div class="col-md-1">
+                            @using (Html.BeginForm("BuyNow", "Auction", FormMethod.Post))
+                            {
+                                @Html.AntiForgeryToken()
+                                @Html.HiddenFor(model => auction.AuctionID) <!-- Скрытое поле для отправки ID аукциона -->
+                                <input type="submit" value="Купить" class="btn btn-primary" />
+                            }
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+    </div>
+</div>
+</div>

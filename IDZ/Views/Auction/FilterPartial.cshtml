@@ -1,0 +1,26 @@
+﻿<form method="get" action="@Url.Action("AuctionList", "Auction")">
+    <div class="input-group mb-3">
+        <input type="text" class="form-control" name="search" placeholder="Поиск по названию" value="@Request.QueryString["search"]" />
+        <button class="btn btn-primary" type="submit">Поиск</button>
+    </div>
+</form>
+
+
+<div>
+    <label for="sort-options">Сортировка:</label>
+    <select id="sort-options" onchange="location = this.value;">
+        <option value="@Url.Action("AuctionList", new { sortOrder = "" })">Выберите сортировку</option>
+        <optgroup label="Название">
+            <option value="@Url.Action("AuctionList", new { sortOrder = "TitleAsc" })">От А до Я</option>
+            <option value="@Url.Action("AuctionList", new { sortOrder = "TitleDesc" })">От Я до А</option>
+        </optgroup>
+        <optgroup label="Цена">
+            <option value="@Url.Action("AuctionList", new { sortOrder = "PriceAsc" })">Сначала дешевые</option>
+            <option value="@Url.Action("AuctionList", new { sortOrder = "PriceDesc" })">Сначала дорогие</option>
+        </optgroup>
+        <optgroup label="Время начала">
+            <option value="@Url.Action("AuctionList", new { sortOrder = "StartTimeAsc" })">Ранние сначала</option>
+            <option value="@Url.Action("AuctionList", new { sortOrder = "StartTimeDesc" })">Поздние сначала</option>
+        </optgroup>
+    </select>
+</div>

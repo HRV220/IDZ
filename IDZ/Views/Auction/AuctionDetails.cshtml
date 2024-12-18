@@ -1,0 +1,87 @@
+﻿@model IDZ.Models.DTO.AuctionDTO
+
+@{
+    ViewBag.Title = "Auction Details";
+}
+
+<h2 class="text-center mt-4">@ViewBag.Title</h2>
+
+<div class="container mt-5">
+    <div class="card shadow">
+        <div class="card-header bg-primary text-white">
+            <h4 class="card-title mb-0">Auction Details</h4>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <!-- Левая часть: Фото -->
+                <div class="col-md-4 text-center">
+                    <img src="@Url.Content("~/images/sample-image.jpg")"
+                         alt="Object Image"
+                         class="img-fluid rounded shadow-sm" />
+                    <p class="mt-3"><small>Фото объекта</small></p>
+                </div>
+
+                <!-- Правая часть: Информация -->
+                <div class="col-md-8">
+                    <table class="table table-borderless">
+                        <tbody>
+                            <tr>
+                                <th class="text-end" style="width: 30%;">@Html.DisplayNameFor(model => model.Title):</th>
+                                <td>@Html.DisplayFor(model => model.Title)</td>
+                            </tr>
+                            <tr>
+                                <th class="text-end">@Html.DisplayNameFor(model => model.Description):</th>
+                                <td>@Html.DisplayFor(model => model.Description)</td>
+                            </tr>
+                            <tr>
+                                <th class="text-end">@Html.DisplayNameFor(model => model.StartTime):</th>
+                                <td>@Html.DisplayFor(model => model.StartTime)</td>
+                            </tr>
+                            <tr>
+                                <th class="text-end">@Html.DisplayNameFor(model => model.EndTime):</th>
+                                <td>@Html.DisplayFor(model => model.EndTime)</td>
+                            </tr>
+                            <tr>
+                                <th class="text-end">@Html.DisplayNameFor(model => model.StartingPrice):</th>
+                                <td>@Html.DisplayFor(model => model.StartingPrice)</td>
+                            </tr>
+                            <tr>
+                                <th class="text-end">@Html.DisplayNameFor(model => model.BuyNowPrice):</th>
+                                <td>@Html.DisplayFor(model => model.BuyNowPrice)</td>
+                            </tr>
+                            <tr>
+                                <th class="text-end">@Html.DisplayNameFor(model => model.MinBidStep):</th>
+                                <td>@Html.DisplayFor(model => model.MinBidStep)</td>
+                            </tr>
+                            <tr>
+                                <th class="text-end">@Html.DisplayNameFor(model => model.CategoryName):</th>
+                                <td>@Html.DisplayFor(model => model.CategoryName)</td>
+                            </tr>
+                            <tr>
+                                <th class="text-end">@Html.DisplayNameFor(model => model.CreatedLogin):</th>
+                                <td>@Html.DisplayFor(model => model.CreatedLogin)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Нижняя часть: Кнопки действий -->
+        <div class="card-footer text-center">
+            <a href="@Url.Action("Edit", new { /* id = Model.PrimaryKey */ })" class="btn btn-warning me-2">
+                <i class="bi bi-pencil"></i> Edit
+            </a>
+            <a href="@Url.Action("Index")" class="btn btn-secondary me-2">
+                <i class="bi bi-arrow-left"></i> Back to List
+            </a>
+            <a href="@Url.Action("PlaceBid", new { id = Model.Title })" class="btn btn-success me-2">
+                <i class="bi bi-currency-dollar"></i> Сделать ставку
+            </a>
+            <a href="@Url.Action("BuyNow", new { id = Model.Title })" class="btn btn-danger">
+                <i class="bi bi-cart"></i> Выкупить лот
+            </a>
+        </div>
+    </div>
+</div>
+
